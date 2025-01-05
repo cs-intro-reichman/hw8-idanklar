@@ -22,6 +22,9 @@ public class Network {
         userCount = 3;
     }
 
+    public int getUserCount() {
+        return this.userCount;
+    }
     /** Finds in this network, and returns, the user that has the given name.
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
@@ -103,10 +106,7 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-        String ans = "Network: " + "\n";
-        for(int i = 0; i < userCount; i++) {
-                ans += users[i].toString() + "\n";
-        }
-        return ans;
+       //// Replace the following statement with your code
+       return null;
     }
 }
