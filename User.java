@@ -74,8 +74,11 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
+        if(name == null) {
+            return false;
+        }
         name = name.toLowerCase();
-        for (int i = 0; i < follows.length; i++) {
+        for (int i = 0; i < follows.length && follows[i] != null; i++) {
             follows[i] = follows[i].toLowerCase();
             if (follows[i] != null && follows[i].equals(name)) {
                 fCount--; 
@@ -96,11 +99,11 @@
     public int countMutual(User other) {
         int counter = 0;
          for(int i = 0; i < this.follows.length; i++) {
-            this.follows[i] = this.follows[i].toLowerCase();
             if(this.follows[i] == null) continue;
+            this.follows[i] = this.follows[i].toLowerCase();
             for(int j = 0; j < other.follows.length; j++) {
-                this.follows[j] = this.follows[j].toLowerCase();
                 if (other.follows[j] == null) continue;
+                this.follows[j] = this.follows[j].toLowerCase();
                 if (this.follows[i].equals(other.follows[j])) {
                     counter++;
                     break;
@@ -115,7 +118,7 @@
     public boolean isFriendOf(User other) {
         boolean thisFollowsOther = false;
         boolean otherFollowsThis = false;
-        for (int i = 0; i < this.follows.length; i++) {
+        for (int i = 0; i < this.follows.length && this.follows[i] != null; i++) {
             this.follows[i] = this.follows[i].toLowerCase();
             if (this.follows[i] != null && this.follows[i].equals(other.name)) {
                 thisFollowsOther = true;
@@ -123,7 +126,7 @@
             }
         }
     
-        for (int i = 0; i < other.follows.length; i++) {
+        for (int i = 0; i < other.follows.length && other.follows[i] != null; i++) {
             other.follows[i] = other.follows[i].toLowerCase();
             if (other.follows[i] != null && other.follows[i].equals(this.name)) {
                 otherFollowsThis = true;
