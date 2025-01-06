@@ -103,7 +103,7 @@
             this.follows[i] = this.follows[i].toLowerCase();
             for(int j = 0; j < other.follows.length; j++) {
                 if (other.follows[j] == null) continue;
-                this.follows[j] = this.follows[j].toLowerCase();
+                other.follows[j] = other.follows[j].toLowerCase();
                 if (this.follows[i].equals(other.follows[j])) {
                     counter++;
                     break;
@@ -116,24 +116,11 @@
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
     public boolean isFriendOf(User other) {
-        boolean thisFollowsOther = false;
-        boolean otherFollowsThis = false;
-        for (int i = 0; i < this.follows.length && this.follows[i] != null; i++) {
-            this.follows[i] = this.follows[i].toLowerCase();
-            if (this.follows[i] != null && this.follows[i].equals(other.name)) {
-                thisFollowsOther = true;
-                break; 
-            }
+        if (this.follows(other.name) && other.follows(this.name)){
+            return true;
         }
-    
-        for (int i = 0; i < other.follows.length && other.follows[i] != null; i++) {
-            other.follows[i] = other.follows[i].toLowerCase();
-            if (other.follows[i] != null && other.follows[i].equals(this.name)) {
-                otherFollowsThis = true;
-                break; 
-            }
-        }
-        return thisFollowsOther && otherFollowsThis;
+        
+        return false;
     }
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
