@@ -45,6 +45,7 @@
     public boolean follows(String name) {
         name = name.toLowerCase();
         for(int i = 0; i < follows.length && follows[i] != null; i++) {
+            follows[i] = follows[i].toLowerCase();
             if (follows[i].equals(name)) {
                 return true;
             }
@@ -73,7 +74,9 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
+        name = name.toLowerCase();
         for (int i = 0; i < follows.length; i++) {
+            follows[i] = follows[i].toLowerCase();
             if (follows[i] != null && follows[i].equals(name)) {
                 fCount--; 
     
@@ -93,8 +96,10 @@
     public int countMutual(User other) {
         int counter = 0;
          for(int i = 0; i < this.follows.length; i++) {
+            this.follows[i] = this.follows[i].toLowerCase();
             if(this.follows[i] == null) continue;
             for(int j = 0; j < other.follows.length; j++) {
+                this.follows[j] = this.follows[j].toLowerCase();
                 if (other.follows[j] == null) continue;
                 if (this.follows[i].equals(other.follows[j])) {
                     counter++;
@@ -111,6 +116,7 @@
         boolean thisFollowsOther = false;
         boolean otherFollowsThis = false;
         for (int i = 0; i < this.follows.length; i++) {
+            this.follows[i] = this.follows[i].toLowerCase();
             if (this.follows[i] != null && this.follows[i].equals(other.name)) {
                 thisFollowsOther = true;
                 break; 
@@ -118,6 +124,7 @@
         }
     
         for (int i = 0; i < other.follows.length; i++) {
+            other.follows[i] = other.follows[i].toLowerCase();
             if (other.follows[i] != null && other.follows[i].equals(this.name)) {
                 otherFollowsThis = true;
                 break; 
