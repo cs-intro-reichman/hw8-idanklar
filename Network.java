@@ -29,8 +29,8 @@ public class Network {
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
-        for(int i = 0; i < users.length; i++) {
-            if (users[i].getName() == name) {
+        for(int i = 0; i < userCount; i++) {
+            if (name.equals(users[i].getName())) {
                 return users[i];
             }
         }
@@ -42,13 +42,14 @@ public class Network {
     *  If the given name is already a user in this network, does nothing and returns false;
     *  Otherwise, creates a new user with the given name, adds the user to this network, and returns true. */
     public boolean addUser(String name) {
+        if (getUser(name) != null) {
+            return false;
+        }
         for(int i = 0; i < users.length; i++) {
-            if (users[i].getName().equals(name)) {
-                return false;
-            }
             if (users[i] == null) {
                 users[i] = new User(name);
                 userCount++;
+                return true;
             }
         }
         return false;
@@ -58,29 +59,12 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        User user1 = null;
-        User user2 = null;
-    
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null) { 
-                if (users[i].getName().equals(name1)) {
-                    user1 = users[i];
-                } 
-                if (users[i].getName().equals(name2)) {
-                    user2 = users[i];
-                }
-            }
-    
-            if (user1 != null && user2 != null) {
-                break;
-            }
+        if (getUser(name1) == null || getUser(name2) == null) {
+            return false;
         }
-    
-        if (user1 != null && user2 != null) {
-            return user1.addFollowee(name2); 
-        }
-    
-        return false;
+        User user = getUser(name1);
+        user.addFollowee(name2);
+        return true;
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
