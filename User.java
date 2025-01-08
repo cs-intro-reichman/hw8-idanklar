@@ -55,7 +55,7 @@
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
         for (int i = 0; i < follows.length; i++) {
-            if (follows[i] != null && follows[i].equals(name.toLowerCase())) {
+            if (follows[i] != null && follows[i].toLowerCase().equals(name.toLowerCase())) {
                 return false;
             }
 
@@ -98,11 +98,9 @@
         int counter = 0;
          for(int i = 0; i < this.follows.length; i++) {
             if(this.follows[i] == null) continue;
-            this.follows[i] = this.follows[i].toLowerCase();
             for(int j = 0; j < other.follows.length; j++) {
                 if (other.follows[j] == null) continue;
-                other.follows[j] = other.follows[j].toLowerCase();
-                if (this.follows[i].equals(other.follows[j])) {
+                if (this.follows[i].toLowerCase(null).equals(other.follows[j].toLowerCase())) {
                     counter++;
                     break;
                 }
